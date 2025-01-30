@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification du Mot de Passe</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'compte.css' %}">
+    <style>
+        /* Styles globaux */
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 350px;
+            width: 100%;
+            padding: 20px;
+            margin-left: 70px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Boutons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 90%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btncompte {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btncompte:hover {
+            background-color: darkgreen;
+        }
+
+        /* Messages d'erreur ou de succès */
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .messages p {
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .messages .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        /* Lien de création de compte */
+        .create-account-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .create-account-link a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Affichage des messages -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Formulaire de connexion -->
+    <div class="container">
+        <h2>Connexion</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" name="username" id="username" required style="width: 100%; padding: 8px; margin-top: 5px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required style="width: 100%; padding: 8px; margin-top: 5px;">
+            </div>
+
+            <button type="submit" class="btn">Valider</button>
+            <div class="create-account-link">
+                <a href="{% url 'register' %}">Créer un compte</a>
+            </div>
+        
+
+        </form>
+    </div>
+
+    
+    <!-- Affiche les boutons après connexion -->
+    {% if user.is_authenticated %}
+        <div class="container" style="text-align: center;">
+            <h2>Bienvenue, {{ user.username }}</h2>
+            <a href="{% url 'view_cvs' %}" class="btn">Voir mes CV</a>
+            <a href="{% url 'trombinoscope' %}" class="btn" style="background-color: red;">Déconnexion</a>
+        </div>
+    {% endif %}
+</body>
+
+</html>

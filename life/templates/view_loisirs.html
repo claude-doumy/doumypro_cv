@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Loisirs</title>
+</head>
+<body>
+    <h1>Mes Loisirs</h1>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+    <div class="top-right-button">
+        <a href="{% url 'boite' %}" class="btn">SORTIR</a>
+    </div>
+
+    {% if loisirs %}
+        <ul>
+            {% for loisir in loisirs %}
+                <li>
+                    <p>{{ loisir.nom }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Vous n'avez pas encore ajouté de loisirs.</p>
+    {% endif %}
+
+    <a href="{% url 'create_or_edit_loisir' %}">
+        <button type="button">Ajouter un loisir</button>
+    </a>
+</body>
+</html>

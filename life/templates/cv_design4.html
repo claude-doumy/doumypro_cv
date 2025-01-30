@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV {{ cv.personne.prenom }} {{ cv.personne.nom }}</title>
+    <link rel="stylesheet" href="{% static 'cv6.css' %}">
+    <style>
+      /* Réinitialisation générale */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Arial, sans-serif;
+      }
+
+      body {
+          background-color: #f4f4f4;
+          color: #333;
+          line-height: 1.6;
+      }
+
+      .container {
+          display: flex;
+          width: 1000px;
+          margin: 20px auto;
+          background-color: #fff;
+      }
+
+      /* Sidebar Gauche */
+      .sidebar {
+          background-color: #333;
+          color: #fff;
+          padding: 20px;
+          width: 30%;
+      }
+
+      .sidebar h2 {
+          border-bottom: 1px solid #fff;
+          margin-bottom: 10px;
+      }
+
+      .sidebar .photo img {
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+          display: block;
+          margin: 10px auto;
+      }
+
+      .sidebar ul {
+          list-style: none;
+      }
+
+      .sidebar ul li {
+          margin: 8px 0;
+      }
+
+      /* Colonne Principale */
+      main {
+          padding: 20px;
+          width: 70%;
+      }
+
+      header h1 {
+          font-size: 36px;
+          margin-bottom: 10px;
+          color: #333;
+      }
+
+      main section {
+          margin-bottom: 20px;
+      }
+
+      main h2 {
+          background-color: #333;
+          color: #fff;
+          padding: 5px;
+          margin-bottom: 10px;
+      }
+
+      .job, .school {
+          margin-bottom: 15px;
+      }
+
+      .job h3, .school h3 {
+          font-size: 18px;
+      }
+
+      .job span {
+          font-weight: normal;
+          color: #666;
+          font-size: 14px;
+      }
+
+      .interets ul {
+          display: flex;
+          gap: 20px;
+      }
+
+      .interets li {
+          list-style: none;
+      }
+    </style>
+</head>
+<body>
+    <nav class="one">
+      
+        {% if not is_email %}
+        <!-- Boutons d'action -->
+        <div class="action-buttons">
+            <!-- Bouton pour imprimer -->
+            <button class="btn-print" style="background-color: blue; color: white;"onclick="window.print()">Imprimer</button>
+
+            <!-- Bouton pour modifier -->
+            <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                <button class="btn-edit" type="submit"style="background-color: green; color: white;">Modifier</button>
+            </form>
+
+            <!-- Bouton pour envoyer par e-mail -->
+            <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-email" type="submit" style="background-color: #ffc107; color: white;">Envoyer par e-mail</button>
+            </form>
+
+            <!-- Bouton pour supprimer -->
+            <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-delete" type="submit"style="background-color: red; color: white;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
+            </form>
+        </div>
+        {% endif %}  
+    </nav>
+    <div class="container">
+        <!-- Colonne Gauche -->
+        <aside class="sidebar">
+            <div class="photo">
+                <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            </div>
+            <section class="profil">
+                <h2>Profil</h2>
+                <p>{{ cv.profil }}</p>
+            </section>
+            <section class="contact">
+                <h2>Contact</h2>
+                <ul>
+                    <li>{{ cv.contact.telephone }}</li>
+                    <li>{{ cv.contact.email }}</li>
+                    <li>{{ cv.contact.site_web }}</li>
+                    <li>{{ cv.contact.adresse }}</li>
+                </ul>
+            </section>
+            <section class="langues">
+                <h2>Langues</h2>
+                <ul>
+                    {% for langue in cv.langues.all %}
+                        <li>{{ langue.nom }} - {{ langue.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="competences">
+                <h2>Compétences</h2>
+                <ul>
+                    {% for competence in cv.competences.all %}
+                        <li>{{ competence.nom }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Colonne Droite -->
+        <main>
+            <header>
+                <h1>{{ cv.personne.prenom }} {{ cv.personne.nom }}</h1>
+            </header>
+            <section class="experience">
+                <h2>Expérience</h2>
+                {% for experience in cv.experiences.all %}
+                    <div class="job">
+                        <h3>{{ experience.titre }} <span>{{ experience.entreprise }} | {{ experience.date_debut }} - {{ experience.date_fin }}</span></h3>
+                        <p>{{ experience.description }}</p>
+                    </div>
+                {% endfor %}
+            </section>
+            <section class="formation">
+                <h2>Formation</h2>
+                {% for formation in cv.formations.all %}
+                    <div class="school">
+                        <h3>{{ formation.diplome }} | {{ formation.date_debut }} - {{ formation.date_fin }}</h3>
+                        <p>{{ formation.institution }}</p>
+                    </div>
+                {% endfor %}
+            </section>
+            <section class="projets">
+                <h2>Projets</h2>
+                <ul>
+                    {% for projet in cv.projets.all %}
+                        <li>{{ projet.nom }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="interets">
+                <h2>Intérêts</h2>
+                <ul>
+                    {% for loisir in cv.loisirs.all %}
+                        <li>{{ loisir.nom }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

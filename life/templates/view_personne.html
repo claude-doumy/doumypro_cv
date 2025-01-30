@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mes Informations Personnelles</title>
+</head>
+<body>
+    <h1>Mes Informations Personnelles</h1>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+    <div class="top-right-button">
+        <a href="{% url 'boite' %}" class="btn">SORTIR</a>
+    </div>
+    {% if personne %}
+        <p><strong>Nom :</strong> {{ personne.nom }}</p>
+        <p><strong>Prénom :</strong> {{ personne.prenom }}</p>
+        <p><strong>Date de Naissance :</strong> {{ personne.date_naissance }}</p>
+        <p><strong>Photo :</strong>
+            {% if personne.photo %}
+                <img src="{{ personne.photo.url }}" alt="Photo de profil" width="150">
+            {% else %}
+                Aucune photo disponible.
+            {% endif %}
+        </p>
+    {% else %}
+        <p>Aucune information personnelle disponible.</p>
+    {% endif %}
+</body>
+</html>

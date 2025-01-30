@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter/Modifier mes Informations de Contact</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'create_contact.css' %}">
+</head>
+<body>
+    <h1>Modifier mes Informations de Contact</h1>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+    <div class="top-right-button">
+        <a href="{% url 'boite' %}" class="btn">SORTIR</a>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" value="{{ form.email.value|default:'' }}" required><br>
+
+        <label for="telephone">Téléphone :</label>
+        <input type="text" name="telephone" id="telephone" value="{{ form.telephone.value|default:'' }}"><br>
+
+        <label for="adresse">Adresse :</label>
+        <textarea name="adresse" id="adresse">{{ form.adresse.value|default:'' }}</textarea><br>
+
+        <button type="submit">Enregistrer</button>
+
+         <!-- Bouton pour voir les informations de contact -->
+    <a href="{% url 'view_contact' %}">
+        <button type="button">Voir mes informations de contact</button>
+    </a>
+    </form>
+
+   
+</body>
+</html>

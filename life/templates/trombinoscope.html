@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trombinoscope</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            background-color: black;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        h1 {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4CAF50;
+}
+
+
+
+      
+
+.header-buttons {
+    display: flex;
+    justify-content: flex-end; /* Aligne les boutons à droite */
+    align-items: flex-start; /* Aligne les boutons en haut */
+    gap: 10px;
+    position: absolute; /* Permet de les placer en haut à droite par rapport au parent */
+    top: 12px; /* Place les boutons tout en haut */
+    right: 20px; /* Ajoute un espace de 20px depuis le bord droit */
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    background-color: #007BFF;
+    transition: background-color 0.3s ease;
+}
+
+/* Optionnel : pour l'effet de survol */
+.btn:hover {
+    background-color: #0056b3;
+}
+
+        .btn:hover {
+            background-color: #04284f;
+        }
+
+        .trombinoscope-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 80px 20px 20px; /* Espace pour le header fixe */
+            max-width: 1200px;
+            margin: auto;
+            align-items: flex-start;
+        }
+
+        .person-card {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .person-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .person-card img {
+            width: 120px;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 40%;
+            margin-bottom: 10px;
+        }
+
+        .person-card a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .person-card a:hover {
+            background-color: #3a9b40;
+        }
+
+        .person-info {
+            font-size: 0.9rem;
+            color: black;
+            margin: 5px 0;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #0d76e6;
+            color: rgb(34, 4, 4);
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .person-card {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Trombinoscope</h1>
+    <div class="header-buttons">
+        <a href="{% url 'formulaire' %}" class="btn">CONNEXION</a>
+        <a href="{% url 'register' %}" class="btn">INSCRIPTION</a>
+    </div>
+</header>
+
+<main>
+    <div class="trombinoscope-container">
+        {% for item in data %}
+        <div class="person-card">
+            {% if item.personne.photo and item.personne.photo.url %}
+            <a href="{% if item.premier_cv %}{% url 'cv_detail' item.premier_cv.id %}{% else %}#{% endif %}">
+                <img src="{{ item.personne.photo.url }}" alt="Photo de {{ item.personne.prenom }} {{ item.personne.nom }}">
+            </a>
+            {% else %}
+            <p style="color: #888;">Aucune photo</p>
+            {% endif %}
+
+            <p class="person-info">{{ item.personne.prenom }} {{ item.personne.nom }}</p>
+            <p class="person-info">{{ item.contact.telephone }}</p>
+            <p class="person-info">{{ item.contact.email }}</p>
+            <p class="person-info">{{ item.contact.adresse }}</p>
+
+            {% if item.premier_cv %}
+            <a href="{% url 'cv_detail' item.premier_cv.id %}">Voir le CV</a>
+            {% else %}
+            <p style="color: #888; font-size: 0.9rem;">Aucun CV disponible</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<footer>
+    <div class="marquee">
+        doumy_pro-cv : le site qui vous permet de créer et stocker votre CV en toute sécurité.
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter/Modifier mes Informations Personnelles</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'create_personne.css' %}">
+</head>
+<body>
+    <h1>Modifier mes Informations Personnelles</h1>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+    <div class="top-right-button">
+        <a href="{% url 'boite' %}" class="btn">SORTIR</a>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom" value="{{ form.nom.value|default:'' }}" required><br>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" name="prenom" id="prenom" value="{{ form.prenom.value|default:'' }}" required><br>
+
+        <label for="date_naissance">Date de Naissance :</label>
+        <input type="date" name="date_naissance" id="date_naissance" value="{{ form.date_naissance.value|default:'' }}" required><br>
+
+        <label for="photo">Photo :</label>
+        <input type="file" name="photo" id="photo"><br>
+
+        <button type="submit">Enregistrer</button>
+
+         <!-- Bouton pour voir les informations personnelles -->
+    <a href="{% url 'view_personne' %}">
+        <button type="button">Voir mes informations personnelles</button>
+    </a>
+    </form>
+
+   
+</body>
+</html>

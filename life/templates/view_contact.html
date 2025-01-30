@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mes Informations de Contact</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .top-right-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <h1>Mes Informations de Contact</h1>
+    <div class="top-right-button">
+        <a href="{% url 'boite' %}" class="btn">SORTIR</a>
+    </div>
+    {% if contact %}
+        <p><strong>Email :</strong> {{ contact.email }}</p>
+        <p><strong>Téléphone :</strong> {{ contact.telephone }}</p>
+        <p><strong>Adresse :</strong> {{ contact.adresse }}</p>
+    {% else %}
+        <p>Aucune information de contact disponible.</p>
+    {% endif %}
+</body>
+</html>

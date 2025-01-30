@@ -1,0 +1,177 @@
+/* Général */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    background-color: black; /* Couleur de fond plus douce */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #006B96;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* Formulaire */
+form {
+    width: 70%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-5px);
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    background-color: #fff;
+}
+
+textarea {
+    height: 12px;
+    resize: vertical;
+}
+
+button {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #570ad4;
+    transform: scale(1.02);
+}
+
+/* Liens */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+a button {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+a button:hover {
+    background-color: #007B9E;
+    transform: scale(1.05);
+}
+
+/* Bouton spécifique */
+.btncompte {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.btncompte:hover {
+    background-color: #006B96;
+    transform: translateY(-2px);
+}
+
+/* Messages */
+.annonce {
+    color: red;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.Bienvenue {
+    color: blue;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Titres */
+.titre {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    .btncompte {
+        width: 70%;
+    }
+}
+
+/* Masquer les textes d'indication */
+form .helptext {
+    display: none; /* Cache les messages d'aide des champs */
+}

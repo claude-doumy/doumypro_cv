@@ -1,0 +1,246 @@
+/* Général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+    color: #4CAF50;
+}
+
+/* Formulaire */
+form {
+    width: 70%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+form label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-top: 10px;
+}
+
+form select,
+form input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+form a {
+    display: inline-block;
+    margin-top: 10px;
+    
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button[type="button"] {
+    width: auto;
+    background-color: #008CBA;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+button[type="button"]:hover {
+    background-color: #c3de9d92;
+}
+
+/* Sections */
+#experiences, #formations, #competences, #langues, #loisirs {
+    margin-top: 10px;
+}
+
+#experiences label, #formations label, #competences label, #langues label, #loisirs label {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Boutons supplémentaires */
+a button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+a button:hover {
+    background-color: #c3de9d92;
+}
+/* Style commun pour tous les boutons */
+button.Voircv,
+button[type="submit"] {
+    position:flex;
+    top: 10px;
+    width: 130px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Conteneur des boutons pour gérer leur placement */
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px; /* Espace entre les boutons */
+}
+
+/* Style commun pour les boutons */
+/* Conteneur pour positionner le bouton en haut à droite */
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Style commun pour le bouton */
+/* Style commun pour le bouton */
+button.submit {
+    padding: 10px 15px; /* Réduction de la largeur horizontale */
+    background-color: rgb(210, 9, 9);
+    color: white;
+    margin-top: 70px ;
+    margin: right 178px; ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    min-width: 100px; /* Limite minimale pour la largeur */
+}
+
+/* Hover effect */
+button.submit:hover {
+    background-color: #d70808;
+    transform: scale(1.05);
+}
+
+/* Focus effect */
+button.submit:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+}
+
+/* Active (clic) effect */
+button.submit:active {
+    transform: scale(0.95);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .button-container {
+        top: 10px;
+        right: 5px; /* Ajuste la marge sur les petits écrans */
+    }
+
+    button.submit {
+        padding: 8px 10px; /* Réduction supplémentaire pour les petits écrans */
+        font-size: 0.9rem;
+        min-width: 80px; /* Réduction de la largeur minimale */
+    }
+}
+.two& {
+    position: flex;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff; /* Bleu moderne */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin-left: 100px;
+    cursor: pointer;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 90px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.two&:hover {
+    background-color: #0056b3; /* Bleu foncé au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px); /* Déplacement léger au survol */
+}
+
+.two&:focus {
+    outline: 2px solid #80bdff; /* Focus visible */
+    outline-offset: 2px;
+}
+
+@media (max-width: 78px) {
+    .two& {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+.top-right-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1f09e8;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
