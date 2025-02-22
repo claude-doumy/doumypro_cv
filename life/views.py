@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -32,6 +32,12 @@ from .models import (
     Loisir,
 )
 from django.contrib.auth.models import User
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('trombinoscope')  # Rediriger vers la page de connexion ou une autre page
+
 
 
 # Vue pour la page d'authentification de l'utilisateur.
@@ -95,7 +101,7 @@ def create_or_edit_personne(request):
 
     return render(request, "create_personne.html", {"form": form})
 
-
+@login_required
 def boite(request):
     try:
         personne = Personne.objects.get(user=request.user)

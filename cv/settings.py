@@ -86,6 +86,8 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = []
+LOGOUT_REDIRECT_URL = '/login/'  # Ou toute autre page
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

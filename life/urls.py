@@ -2,6 +2,11 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
+from .views import logout_view
+
+
+
+
 urlpatterns = [
     path('', views.trombinoscope, name='trombinoscope'),
 
@@ -18,6 +23,7 @@ urlpatterns = [
     
     # Ajoutez une route par défaut pour la page de formulaire d'authentification
     path('connexion', views.formulaire, name='formulaire'),
+    path('logout/', logout_view, name='logout'),
     
     # Réécrivez les routes pour créer ou éditer les autres tables
     path('create_or_edit_personne/', views.create_or_edit_personne, name='create_or_edit_personne'),
@@ -56,6 +62,6 @@ urlpatterns = [
     path('cv/<int:cv_id>/delete/', views.delete_cv, name='delete_cv'),
 #liens pour envoyer par mail
 path("cv/<int:cv_id>/send_email/", views.send_cv_email, name="send_cv_email"),
-path('logout/', LogoutView.as_view(next_page='trombinoscope'), name='logout'),
+# path('logout/', LogoutView.as_view(next_page='trombinoscope'), name='logout'),
 ]
 

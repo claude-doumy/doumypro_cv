@@ -153,6 +153,8 @@
     {% if user.is_authenticated %}
         <div class="container" style="text-align: center;">
             <h2>Bienvenue, {{ user.username }}</h2>
+            <a href="{% url 'formulaire' %}">Déconnexion</a>
+
             <a href="{% url 'view_cvs' %}" class="btn">Voir mes CV</a>
             <a href="{% url 'trombinoscope' %}" class="btn" style="background-color: red;">Déconnexion</a>
         </div>
